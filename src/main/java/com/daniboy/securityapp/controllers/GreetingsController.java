@@ -1,4 +1,4 @@
-package com.daniboy.securityapp;
+package com.daniboy.securityapp.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
