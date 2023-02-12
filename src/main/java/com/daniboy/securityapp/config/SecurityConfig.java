@@ -16,8 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.daniboy.securityapp.config.security.JwtAuthFilter;
 import com.daniboy.securityapp.dao.UserDao;
+import com.daniboy.securityapp.security.JwtAuthFilter;
 
 import lombok.RequiredArgsConstructor;
 
@@ -60,7 +60,7 @@ public class SecurityConfig {
 
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {  
         return NoOpPasswordEncoder.getInstance(); // para retorna password sem ecriptacao 
         // return new BCryptPasswordEncoder();
     }

@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.daniboy.securityapp.config.security.JwtUtils;
 import com.daniboy.securityapp.dao.UserDao;
 import com.daniboy.securityapp.dto.AuthenticationRequest;
+import com.daniboy.securityapp.security.JwtUtils;
 
 import lombok.RequiredArgsConstructor;
 

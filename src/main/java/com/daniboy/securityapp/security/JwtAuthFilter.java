@@ -1,4 +1,4 @@
-package com.daniboy.securityapp.config.security;
+package com.daniboy.securityapp.security;
 
 import java.io.IOException;
 
@@ -10,10 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import com.daniboy.securityapp.dao.UserDao;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
 
-    private final UserDetailsService userDetailsService;
+    private final UserDao userDao;
     private final JwtUtils jwtUtils;
     private static final String AUTHORAZATION = "Authorization";
     private static final String BEARER = "Bearer ";
@@ -44,7 +45,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         userEmail = jwtUtils.extractUserName(jwtToken);
 
         if(userEmail == null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = userDetailsService.loadUserByUsername(userEmail);
+            UserDetails userDetails = userDao.findUserByEmail(userEmail);
 
             if(jwtUtils.isTokenValid(jwtToken, userDetails)) {
                 UsernamePasswordAuthenticationToken authToken = 

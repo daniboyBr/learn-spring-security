@@ -1,4 +1,4 @@
-package com.daniboy.securityapp.config.security;
+package com.daniboy.securityapp.security;
 
 import java.util.Date;
 import java.util.HashMap;
