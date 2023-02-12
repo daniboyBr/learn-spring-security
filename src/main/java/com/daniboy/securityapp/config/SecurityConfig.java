@@ -31,7 +31,9 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            .csrf().disable()
             .authorizeRequests()
+            .antMatchers("/**/auth/**").permitAll()
             .anyRequest()
             .authenticated()
             .and()
@@ -43,7 +45,6 @@ public class SecurityConfig {
 
         return http.build();
     }
-
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
@@ -58,10 +59,9 @@ public class SecurityConfig {
         return config.getAuthenticationManager();
     }
 
-
     @Bean
-    public PasswordEncoder passwordEncoder() {  
-        return NoOpPasswordEncoder.getInstance(); // para retorna password sem ecriptacao 
+    public PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance(); // para retorna password sem ecriptacao
         // return new BCryptPasswordEncoder();
     }
 
@@ -74,5 +74,5 @@ public class SecurityConfig {
             }
         };
     }
- 
+
 }
